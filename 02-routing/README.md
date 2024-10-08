@@ -36,21 +36,29 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Each folder represents a route segment that is mapped to a corresponding segment in a URL path.
 - Even though route structure is defined through folders, a route is not publicly accessible until a `page.js` or `route.js` file is added to a route segment.
 - And, even when a route is made publicly accessible, only the content returned by `page.js` or `route.js` is sent to the client. This means that project files can be safely colocated inside route segments in the `app` directory without accidentally being routable
+
 #### Project organization features
+
 Next.js provides several features to help you organize your project.
 
 ##### Private Folders
+
 - Private folders can be created by prefixing a folder with an underscore: `_folderName`.
 - This indicates the folder is a private implementation detail and should not be considered by the routing system, thereby opting the folder and all its subfolders out of routing.
 - Since files in the app directory can be safely colocated by default, private folders are not required for colocation. However, they can be useful for:
-    - Separating UI logic from routing logic.
-    - Consistently organizing internal files across a project and the Next.js ecosystem.
-    - Sorting and grouping files in code editors.
-    - Avoiding potential naming conflicts with future Next.js file conventions.
+  - Separating UI logic from routing logic.
+  - Consistently organizing internal files across a project and the Next.js ecosystem.
+  - Sorting and grouping files in code editors.
+  - Avoiding potential naming conflicts with future Next.js file conventions.
 - You can create URL segments that start with an underscore by prefixing the folder name with `%5F` (the URL-encoded form of an underscore): `%5FfolderName`.
 
+##### Route Groups
 
-- 
+- Route groups can be created by wrapping a folder in parenthesis: `(folderName)`. This indicates the folder is for organizational purposes and should not be included in the route's URL path.
+
+- Route groups are useful for:
+  - **Organizing routes into groups** e.g. by site section, intent, or team.
+
 ## Getting Started
 
 First, run the development server:
