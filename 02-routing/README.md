@@ -17,8 +17,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   - `route`: Server-side API endpoint
   - `template`: Specialized re-rendered Layout UI
   - `default`: Fallback UI for Parallel Routes
-
-`Good to know: .js, .jsx, or .tsx file extensions can be used for special files.`
+- `Good to know: .js, .jsx, or .tsx file extensions can be used for special files.`
+- Dynamic Segments can be extended to **catch-all** subsequent segments by adding an ellipsis inside the brackets [...segmentName]. This is called `Catch-all Segments`.
+  - For example, `pages/shop/[...slug].js` will match `/shop/clothes`, but also `/shop/clothes/tops`, `/shop/clothes/tops/t-shirts`, and so on.
+- Catch-all Segments can be made **optional** by including the parameter in double square brackets: [[...segmentName]].
+  - For example, `pages/shop/[[...slug]].js` will also match `/shop`, in addition to `/shop/clothes`, `/shop/clothes/tops`, `/shop/clothes/tops/t-shirts`.
+- The difference between **catch-all** and **optional catch-all** segments is that with optional, the route without the parameter is also matched (/shop in the example above).
 
 ## Getting Started
 
