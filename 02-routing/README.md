@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Tips
 
+### Routing
+
 - All routes must be placed in the `app` folder
 - Next.js uses a file-system based router where folders are used to define routes.
 - Each folder represents a route segment that maps to a URL segment. To create a nested route, you can nest folders inside each other.
@@ -18,11 +20,22 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   - `template`: Specialized re-rendered Layout UI
   - `default`: Fallback UI for Parallel Routes
 - `Good to know: .js, .jsx, or .tsx file extensions can be used for special files.`
+
+### Catch-all Segments
+
 - Dynamic Segments can be extended to **catch-all** subsequent segments by adding an ellipsis inside the brackets [...segmentName]. This is called `Catch-all Segments`.
   - For example, `pages/shop/[...slug].js` will match `/shop/clothes`, but also `/shop/clothes/tops`, `/shop/clothes/tops/t-shirts`, and so on.
 - Catch-all Segments can be made **optional** by including the parameter in double square brackets: [[...segmentName]].
   - For example, `pages/shop/[[...slug]].js` will also match `/shop`, in addition to `/shop/clothes`, `/shop/clothes/tops`, `/shop/clothes/tops/t-shirts`.
 - The difference between **catch-all** and **optional catch-all** segments is that with optional, the route without the parameter is also matched (/shop in the example above).
+
+### Project Organization and File Colocation
+
+#### Safe colocation by default
+
+- Each folder represents a route segment that is mapped to a corresponding segment in a URL path.
+- Even though route structure is defined through folders, a route is not publicly accessible until a `page.js` or `route.js` file is added to a route segment.
+- And, even when a route is made publicly accessible, only the content returned by `page.js` or `route.js` is sent to the client. This means that project files can be safely colocated inside route segments in the `app` directory without accidentally being routable
 
 ## Getting Started
 
