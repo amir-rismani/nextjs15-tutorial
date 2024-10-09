@@ -63,7 +63,7 @@ Next.js provides several features to help you organize your project.
   - **Organizing routes into groups** e.g. by site section, intent, or team.
   - Enabling **nested layouts** in the same route segment level:
     - Creating multiple nested layouts in the same segment, including multiple root layouts
-    - Adding a layout to a subset of routes in a common segment
+    - Adding a layout to a subset of routes in a common segment. (Opting specific segments into a layout)
 
 - To create multiple root layouts, remove the top-level `layout.js` file, and add a `layout.js` file inside each **route groups**. This is useful for partitioning an application into sections that have a completely different UI or experience. The `<html>` and `<body>` tags need to be **added to each root layout**.
 ## Getting Started
