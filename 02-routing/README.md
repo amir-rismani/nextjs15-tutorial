@@ -14,12 +14,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   - `page`: Unique UI of a route and make routes publicly accessible
   - `loading`: Loading UI for a segment and its children
   - `not-found`: Not found UI for a segment and its children
-  - `not-found`: Error UI for a segment and its children
+  - `error`: Error UI for a segment and its children
   - `global-error`: Global Error UI
   - `route`: Server-side API endpoint
   - `template`: Specialized re-rendered Layout UI
   - `default`: Fallback UI for Parallel Routes
 - `Good to know: .js, .jsx, or .tsx file extensions can be used for special files.`
+- A layout is UI that is **shared between multiple routes**. On navigation, layouts **preserve state**, **remain interactive**, and **do not re-render**.
+- The root layout is defined at the top level of the `app` directory and applies to all routes.
+- By default, layouts in the folder hierarchy are nested, which means they wrap child layouts via their `children` prop. You can nest layouts by adding `layout.js` inside specific route segments (folders).
 
 ### Catch-all Segments
 
@@ -58,7 +61,11 @@ Next.js provides several features to help you organize your project.
 
 - Route groups are useful for:
   - **Organizing routes into groups** e.g. by site section, intent, or team.
+  - Enabling **nested layouts** in the same route segment level:
+    - Creating multiple nested layouts in the same segment, including multiple root layouts
+    - Adding a layout to a subset of routes in a common segment
 
+- To create multiple root layouts, remove the top-level `layout.js` file, and add a `layout.js` file inside each **route groups**. This is useful for partitioning an application into sections that have a completely different UI or experience. The `<html>` and `<body>` tags need to be **added to each root layout**.
 ## Getting Started
 
 First, run the development server:

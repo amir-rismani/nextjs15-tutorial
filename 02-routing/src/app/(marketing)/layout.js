@@ -1,4 +1,4 @@
-import './globals.css'
+import '../globals.css'
 
 export const metadata = {
   title: 'Next.js',
@@ -10,9 +10,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div className='flex flex-col h-screen'>
-          <header className='bg-slate-100 w-full p-3'>Header</header>
+          <header className='bg-red-100 w-full p-3'>Marketing Root Layout Header</header>
           <main className='flex-1 w-full p-3'>{children}</main>
-          <footer className='bg-blue-100 w-full p-3'>Footer</footer>
+          <footer className='bg-amber-100 w-full p-3'>Marketing Root Layout Footer</footer>
         </div>
       </body>
     </html>
