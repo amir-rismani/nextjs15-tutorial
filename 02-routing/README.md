@@ -133,6 +133,16 @@ Next.js provides several features to help you organize your project.
   />
   ```
 
+### <Link>
+
+- `<Link>` is a React component that extends the HTML <a> element to provide **prefetching** and client-side navigation between routes.
+- It is the primary way to navigate between routes in Next.js.
+- Here's a summary of the props available for the Link Component:
+  - `href` (required): The path or URL to navigate to. `href` can also accept an object.
+  - `replace`: Defaults to `false`. When true, `next/link` will replace the current history state instead of adding a new URL into the **browser’s history** stack.
+  - `scroll`: Defaults to `true`. The default behavior of `<Link>` **is to scroll to the top of a new route or to maintain the scroll position for backwards and forwards navigation.** When `false`, `next/link` will *not scroll to the top of the page after a navigation.*
+  - `prefetch`: Prefetching happens when a `<Link />` component enters the user's viewport (initially or through scroll). Next.js prefetches and loads the linked route (denoted by the `href`) and data in the background to improve the performance of client-side navigations. Prefetching is only enabled in production.
+
 ## Getting Started
 
 First, run the development server:
