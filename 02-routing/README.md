@@ -60,12 +60,79 @@ Next.js provides several features to help you organize your project.
 - Route groups can be created by wrapping a folder in parenthesis: `(folderName)`. This indicates the folder is for organizational purposes and should not be included in the route's URL path.
 
 - Route groups are useful for:
+
   - **Organizing routes into groups** e.g. by site section, intent, or team.
   - Enabling **nested layouts** in the same route segment level:
     - Creating multiple nested layouts in the same segment, including multiple root layouts
     - Adding a layout to a subset of routes in a common segment. (Opting specific segments into a layout)
 
 - To create multiple root layouts, remove the top-level `layout.js` file, and add a `layout.js` file inside each **route groups**. This is useful for partitioning an application into sections that have a completely different UI or experience. The `<html>` and `<body>` tags need to be **added to each root layout**.
+
+### Metadata
+
+- Next.js has a Metadata API that can be used to define your application metadata (e.g. meta and link tags inside your HTML head element) for improved SEO and web shareability.
+- There are two ways you can add metadata to your application:
+
+  - **Config-based Metadata:** _Export a static metadata object_ or a _dynamic generateMetadata function_ in a `layout.js` or `page.js` file.
+
+    - **Static Metadata**
+      To define static metadata, export a Metadata object from a `layout.js` or static `page.js` file.
+
+      ```javascript
+      export const metadata = {
+        title: "...",
+        description: "...",
+      };
+
+      export default function Page() {}
+      ```
+
+    - **Dynamic Metadata**
+      You can use generateMetadata function to fetch metadata that requires dynamic values.
+
+      ```javascript
+      export async function generateMetadata({ params, searchParams }, parent) {
+        // read route params
+        const id = params.id;
+
+        // fetch data
+        const product = await fetch(`https://.../${id}`).then((res) =>
+          res.json()
+        );
+
+        // optionally access and extend (rather than replace) parent metadata
+        const previousImages = (await parent).openGraph?.images || [];
+
+        return {
+          title: product.title,
+          openGraph: {
+            images: ["/some-specific-page-image.jpg", ...previousImages],
+          },
+        };
+      }
+
+      export default function Page({ params, searchParams }) {}
+      ```
+
+  - **File-based Metadata:** Add static or dynamically generated special files to route segments. File-based metadata has the higher priority and will override any config-based metadata.
+
+#### Open Graph meta tags
+
+- Open Graph meta tags are snippets of code that control how URLs are displayed when shared on social media.
+- They’re part of Facebook’s Open Graph protocol and are also used by other social media sites, including LinkedIn and Twitter (if Twitter Cards are absent).
+- You can find them in the <head> section of a webpage. Any tags with og: before a property name are Open Graph tags.
+  ```html
+  <meta property="og:title" content="How to Become an SEO Expert (8 Steps)" />
+  <meta
+    property="og:description"
+    content="Get from SEO newbie to SEO pro in 8 simple steps."
+  />
+  <meta
+    property="og:image"
+    content="https://ahrefs.com/blog/wp-content/uploads/2019/12/fb-how-to-become-an-seo-expert.png"
+  />
+  ```
+
 ## Getting Started
 
 First, run the development server:
