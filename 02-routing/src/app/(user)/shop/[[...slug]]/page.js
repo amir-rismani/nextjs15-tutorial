@@ -9,11 +9,11 @@ const products = [
 ]
 
 function ShopPage({ params }) {
-    console.log(params);
+    throw Error('Loading error...')
     return (
         <>
             <h1>Shop Page</h1>
-            <Suspense fallback={<Loading/>}>
+            <Suspense fallback={<Loading />}>
                 <Products />
             </Suspense>
         </>
