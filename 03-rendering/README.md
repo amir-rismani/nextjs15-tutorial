@@ -1,9 +1,48 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Tips
+
 ### Rendering
+
 - Rendering is the process that transforms the code you write into user interface.
 - Choosing the right time and place to do this rendering is vital for building a performant application.
+
+#### Client-side Rendering (CSR)
+
+- the browser downloads a minimal HTML page and the JavaScript needed for the page.
+- The JavaScript is then used to update the DOM and render the page.
+- When the application is first loaded, the user may notice a slight delay before they can see the full page, this is because the page isn't fully rendered until all the JavaScript is downloaded, parsed, and executed.
+- After the page has been loaded for the first time, navigating to other pages on the same website is typically faster, as only necessary data needs to be fetched, and JavaScript can re-render parts of the page without requiring a full page refresh.
+- **Rendreing proccess:**
+  1. **Request** (from client)
+  2. **Response** (HTML + JS bundle - Blank screen)
+  3. **Request** (Download JS)
+  4. **Response** (JS)
+  5. Generate HTML
+
+##### Drawbacks of CSR
+
+- **SEO:** A single div tag is not optimal for SEO.
+- **Performance:** Handling all the work such as fetching data, computing UI and making HTML interactive can slow things down (slow load times).
+  - Download, parse and execute javascript
+  - Users might see a blank screen or a loading spinner while the page loads
+  - Increase the size of the javascript bundle, prolonging the wait time for users to see the UI
+  - Network waterfall to fetch data
+
+#### Server-side Rendering (SSR)
+
+- page HTML is generated on each request.
+- **Rendreing proccess:**
+  1. **Request** (from client - Generate HTML)
+  2. **Response** (HTML + JS reference - Non-interactive UI)
+  3. **Request** (Download JS)
+  4. **Response** (JS)
+  5. Hydration
+
+##### SSR benefits
+
+- **SEO:** improves the SEO because search engines can easily index the server-rendered content
+- **Performance:** User can immediately see the page html content, instead of blank screen or loading spinner (fast initial page load)
 
 ## Getting Started
 
