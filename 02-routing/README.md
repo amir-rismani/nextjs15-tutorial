@@ -158,7 +158,15 @@ Next.js provides several features to help you organize your project.
 - This helps users understand the app is **responding** and **provides a better user experience**.
 
 #### Streaming with Suspense
-- In addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with Suspense for both Node.js and Edge runtimes
+- In addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with Suspense for both Node.js and Edge runtimes.
+
+### Linking and Navigating
+- There are four ways to navigate between routes in Next.js:
+  - Using the **`<Link>` Component**
+  - Using the **useRouter hook (Client Components)**
+  - Using the **redirect function (Server Components)**
+  - Using the native History API
+
 ## Getting Started
 
 First, run the development server:
