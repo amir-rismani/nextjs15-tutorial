@@ -143,6 +143,12 @@ Next.js provides several features to help you organize your project.
   - `scroll`: Defaults to `true`. The default behavior of `<Link>` **is to scroll to the top of a new route or to maintain the scroll position for backwards and forwards navigation.** When `false`, `next/link` will *not scroll to the top of the page after a navigation.*
   - `prefetch`: Prefetching happens when a `<Link />` component enters the user's viewport (initially or through scroll). Next.js prefetches and loads the linked route (denoted by the `href`) and data in the background to improve the performance of client-side navigations. Prefetching is only enabled in production.
 
+### Error Handling
+- The `error.js` file convention allows you to gracefully handle unexpected runtime errors in nested routes.
+- Automatically wrap a **route segment** and its **nested children** in a React Error Boundary.
+- Create error UI tailored to specific segments using the file-system hierarchy to adjust granularity.
+- Isolate errors to affected segments while keeping the rest of the application functional.
+- Isolate errors to affected segments while keeping the rest of the application functional
 ## Getting Started
 
 First, run the development server:
