@@ -148,7 +148,17 @@ Next.js provides several features to help you organize your project.
 - Automatically wrap a **route segment** and its **nested children** in a React Error Boundary.
 - Create error UI tailored to specific segments using the file-system hierarchy to adjust granularity.
 - Isolate errors to affected segments while keeping the rest of the application functional.
-- Isolate errors to affected segments while keeping the rest of the application functional
+
+### Loading UI and Streaming
+- The special file `loading.js` helps you create meaningful Loading UI with **React Suspense**.
+- With this convention, you can show an instant loading state from the server while the content of a route segment loads.
+#### Instant Loading States
+- An instant loading state is fallback UI that is shown immediately upon navigation.
+- You can pre-render loading indicators such as skeletons and spinners, or a small but meaningful part of future screens such as a cover photo, title, etc.
+- This helps users understand the app is **responding** and **provides a better user experience**.
+
+#### Streaming with Suspense
+- In addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with Suspense for both Node.js and Edge runtimes
 ## Getting Started
 
 First, run the development server:
