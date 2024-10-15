@@ -13,7 +13,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - The JavaScript is then used to update the DOM and render the page.
 - When the application is first loaded, the user may notice a slight delay before they can see the full page, this is because the page isn't fully rendered until all the JavaScript is downloaded, parsed, and executed.
 - After the page has been loaded for the first time, navigating to other pages on the same website is typically faster, as only necessary data needs to be fetched, and JavaScript can re-render parts of the page without requiring a full page refresh.
-- **Rendreing proccess:**
+- **Rendreing process:**
   1. **Request** (from client)
   2. **Response** (HTML + JS bundle - Blank screen)
   3. **Request** (Download JS)
@@ -32,18 +32,34 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 #### Server-side Rendering (SSR)
 
 - page HTML is generated on each request.
-- **Rendreing proccess:**
+- **Rendreing process:**
   1. **Request** (from client - Generate HTML)
-  2. **Response** (HTML + JS reference - Non-interactive UI)
+  2. **Response** (Full HTML + JS reference - Non-interactive UI)
   3. **Request** (Download JS)
   4. **Response** (JS)
   5. Hydration
+    - Hydrate dry HTML with `JavaScript`
+    - Is the process of attaching event listener to the DOM, **to make the static HTML interactive**.
+    - initializing the application state, attaching event handlers for actions.
 
 ##### SSR benefits
 
 - **SEO:** improves the SEO because search engines can easily index the server-rendered content
 - **Performance:** User can immediately see the page html content, instead of blank screen or loading spinner (fast initial page load)
 
+#### CSR vs SSR
+**CSR:**
+  - HTML is rendered on the **client** (browser) using `JavaScript`
+  - **Slower initial page loades:**
+    - Bigger JavaScript bundle needs to be downloaded before app starts running
+    - Data is fetched after components mount
+  - **SEO can be problematic**
+**SSR:**
+  - HTML is rendered on the **server**
+  - **Faster initial page loades:**
+    - Less JavaScript needs to be downloaded and executed
+    - Data is fetched before HTML is rendered
+  - **SEO-friendly:** content is easier for search engines to index
 ## Getting Started
 
 First, run the development server:
