@@ -60,7 +60,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ###### Typical Timeline
 
 ```
-                                         First Contentful Paint (FCP)             Lagest Contentful Paint (LCP)
+                                         First Contentful Paint (FCP)             Largest Contentful Paint (LCP)
   Server ---- Empty page ------------------------------|--- Fetch Data -----------------------|
                     \                                  |   /          \                       |
                      \                                 |  /            \                      |
@@ -80,7 +80,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ```
 Much faster!
-                                                  First Contentful Paint (FCP) and Lagest Contentful Paint (LCP)
+                                                  First Contentful Paint (FCP) and Largest Contentful Paint (LCP)
   Server ---- Fetch data -----> Render App with data ---------------------|------------------------------------------
                                                    \                      |
                                                     \                     |
