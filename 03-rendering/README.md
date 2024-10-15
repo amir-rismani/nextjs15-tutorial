@@ -81,11 +81,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ```
 Much faster!
                                                   First Contentful Paint (FCP) and Largest Contentful Paint (LCP)
-  Server ---- Fetch data -----> Render App with data ---------------------|------------------------------------------
-                                                   \                      |
-                                                    \                     |
-                                                     \                    |
-  Client --------------------------------------------- HTML, CSS and JS |----> Download JS bundle -----> Hydrate ----
+  Server ---- Fetch data -----> Render App with data ------------------|--------------------------------------------
+                                                   \                   |
+                                                    \                  |
+                                                     \                 |
+  Client -------------------------------------------- HTML, CSS and JS |----> Download JS bundle -----> Hydrate ----
 ```
 
 #### When to use SSR and CSR?
