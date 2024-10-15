@@ -60,7 +60,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ###### Typical Timeline
 
 ```
-                                          **First Contentful Paint**                  **Lagest Contentful Paint**
+                                             First Contentful Paint                      Lagest Contentful Paint
   Server ---- Empty page ------------------------------|--- Fetch Data -----------------------------|
                     \                                  |   /          \                             |
                      \                                 |  /            \                            |
@@ -79,8 +79,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ###### Typical Timeline
 
 ```
-**Much faster!**
-                                                **First Contentful Paint and Lagest Contentful Paint**
+Much faster!
+                                                  First Contentful Paint and Lagest Contentful Paint
   Server ---- Fetch data -----> Render App with data ---------------------|------------------------------------------
                                                    \                      |
                                                     \                     |
