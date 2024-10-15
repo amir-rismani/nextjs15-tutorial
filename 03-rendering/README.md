@@ -38,9 +38,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   3. **Request** (Download JS)
   4. **Response** (JS)
   5. Hydration
-    - Hydrate dry HTML with `JavaScript`
-    - Is the process of attaching event listener to the DOM, **to make the static HTML interactive**.
-    - initializing the application state, attaching event handlers for actions.
+  - Hydrate dry HTML with `JavaScript`
+  - Is the process of attaching event listener to the DOM, **to make the static HTML interactive**.
+  - initializing the application state, attaching event handlers for actions.
 
 ##### SSR benefits
 
@@ -48,18 +48,63 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - **Performance:** User can immediately see the page html content, instead of blank screen or loading spinner (fast initial page load)
 
 #### CSR vs SSR
-**CSR:**
-  - HTML is rendered on the **client** (browser) using `JavaScript`
-  - **Slower initial page loades:**
-    - Bigger JavaScript bundle needs to be downloaded before app starts running
-    - Data is fetched after components mount
-  - **SEO can be problematic**
-**SSR:**
-  - HTML is rendered on the **server**
-  - **Faster initial page loades:**
-    - Less JavaScript needs to be downloaded and executed
-    - Data is fetched before HTML is rendered
-  - **SEO-friendly:** content is easier for search engines to index
+
+##### CSR:
+
+- HTML is rendered on the **client** (browser) using `JavaScript`
+- **Slower initial page loades:**
+  - Bigger JavaScript bundle needs to be downloaded before app starts running
+  - Data is fetched after components mount
+- **SEO can be problematic**
+
+###### Typical Timeline
+
+```
+                                          $${\color{red}First Contentful Paint}$$	            $${\color{red}Lagest Contentful Paint}$$
+  Server ---- Empty page ------------------------------|--- Fetch Data -----------------------------|
+                    \                                  |   /          \                             |
+                     \                                 |  /            \                            |
+                      \                                | /              \                           |
+  Client ---- Download JS bundle -----> Render Spinner |/--------------- Render App with data ------|
+```
+
+##### SSR:
+
+- HTML is rendered on the **server**
+- **Faster initial page loades:**
+  - Less JavaScript needs to be downloaded and executed
+  - Data is fetched before HTML is rendered
+- **SEO-friendly:** content is easier for search engines to index
+
+###### Typical Timeline
+
+```
+                                          $${\color{red}First Contentful Paint and Lagest Contentful Paint}$$	                           $${\color{green}Much faster!}$$
+  Server ---- Fetch data -----> Render App with data ---------------------|------------------------------------------
+                                                   \                      |
+                                                    \                     |
+                                                     \                    |
+  Client --------------------------------------------- HTML, CSS and JS |----> Download JS bundle -----> Hydrate ----
+```
+
+#### When to use SSR and CSR?
+
+##### CSR
+
+- **SPAs:** Perfect for building highly interactive Web apps.
+- **Apps that don't need SEO:**
+  - Apps that are used "internally" as tools inside companies
+  - Apps that are entirely hidden behind a login
+
+##### SSR
+
+- **Content-driven website or apps where SEO is essential:** E-commerce, blog, news, marketing website, etc.
+
+###### Types of SSR
+
+- **Static Side Generation (SSG):** SSG occurs at build time, when the application is deployed on the server. It is ideal for content that doesn't change often, like blog posts.
+- **Server Side Rendering (SSR)** SSR renders the page on demand in response to user requests. It is suitable for personalized content like social media feeds, where the HTML depends on the logged-in user
+
 ## Getting Started
 
 First, run the development server:
