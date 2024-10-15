@@ -60,12 +60,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ###### Typical Timeline
 
 ```
-                                         First Contentful Paint (FCP)                 Lagest Contentful Paint (LCP)
-  Server ---- Empty page ------------------------------|--- Fetch Data -----------------------------|
-                    \                                  |   /          \                             |
-                     \                                 |  /            \                            |
-                      \                                | /              \                           |
-  Client ---- Download JS bundle -----> Render Spinner |/--------------- Render App with data ------|
+                                         First Contentful Paint (FCP)             Lagest Contentful Paint (LCP)
+  Server ---- Empty page ------------------------------|--- Fetch Data -----------------------|
+                    \                                  |   /          \                       |
+                     \                                 |  /            \                      |
+                      \                                | /              \                     |
+  Client ---- Download JS bundle -----> Render Spinner |/--------------- Render App with data |
 ```
 
 ##### SSR:
