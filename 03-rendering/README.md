@@ -38,9 +38,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   3. **Request** (Download JS)
   4. **Response** (JS)
   5. Hydration
-  - Hydrate dry HTML with `JavaScript`
-  - Is the process of attaching event listener to the DOM, **to make the static HTML interactive**.
-  - initializing the application state, attaching event handlers for actions.
+    - Hydrate dry HTML with `JavaScript`
+    - Is the process of attaching event listener to the DOM, **to make the static HTML interactive**.
+    - initializing the application state, attaching event handlers for actions.
 
 ##### SSR benefits
 
