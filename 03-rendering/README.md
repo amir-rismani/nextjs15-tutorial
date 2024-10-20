@@ -38,9 +38,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   3. **Request** (Download JS)
   4. **Response** (JS)
   5. Hydration
-    - Hydrate dry HTML with `JavaScript`
-    - Is the process of attaching event listener to the DOM, **to make the static HTML interactive**.
-    - initializing the application state, attaching event handlers for actions.
+  - Hydrate dry HTML with `JavaScript`
+  - Is the process of attaching event listener to the DOM, **to make the static HTML interactive**.
+  - initializing the application state, attaching event handlers for actions.
 
 ##### SSR benefits
 
@@ -106,6 +106,86 @@ Much faster!
 - **Static Side Generation (SSG):** SSG occurs at build time, when the application is deployed on the server. It is ideal for content that doesn't change often, like blog posts.
 - **Server Side Rendering (SSR)** SSR renders the page on demand in response to user requests. It is suitable for personalized content like social media feeds, where the HTML depends on the logged-in user
 
+###### Drawback of SSR
+
+1. You hav to fetch everything before you can show anything
+
+- Fetching must be completed before the server can begin rendering the page
+- Delay the server's response time to the browser, as the server must finish collecting all necessary data before any part of the page can be sent to the client
+
+```
+Time ----------------------------->
+------------------------------------------------------------------------------------------------------
+                                      |TTFB             |FCP   |TTI
+  <--------------------------->       |                 |      |
+  |A__________________________||B_____|_||C_____________|_||D__|_|
+
+  |A| Fetching data on server                                TTFB   Time To First Byte
+  |B| Rendering HTML on server                               FCP    First Contentful Paint
+  |C| Loading code on the client                             TTI    Time To Interactive
+  |D| Hydrating
+------------------------------------------------------------------------------------------------------
+```
+
+2. You have to load everything before you can hydrate anything
+
+- The component tree in the browser must exactly match the server-generated component tree
+- This means that all the JavaScript for the components must be loaded on the client before you can start hydration any of them
+
+```
+Time ----------------------------->
+------------------------------------------------------------------------------------------------------
+                                      |TTFB             |FCP   |TTI
+                               <------|-----------------|->    |
+  |A__________________________||B_____|_||C_____________|_||D__|_|
+
+  |A| Fetching data on server                                TTFB   Time To First Byte
+  |B| Rendering HTML on server                               FCP    First Contentful Paint
+  |C| Loading code on the client                             TTI    Time To Interactive
+  |D| Hydrating
+------------------------------------------------------------------------------------------------------
+```
+
+3. You have to hydrate everything before you can interact with anything
+
+- When React starts hydration, it won't stop until it's finished with the entire tree
+- All components must be hydrate before you can interact with any of theme
+
+```
+Time ----------------------------->
+------------------------------------------------------------------------------------------------------
+                                      |TTFB             |FCP   |TTI
+                                      |                 |  <---|->
+  |A__________________________||B_____|_||C_____________|_||D__|_|
+
+  |A| Fetching data on server                                TTFB   Time To First Byte
+  |B| Rendering HTML on server                               FCP    First Contentful Paint
+  |C| Loading code on the client                             TTI    Time To Interactive
+  |D| Hydrating
+------------------------------------------------------------------------------------------------------
+```
+
+**Summary**
+  - First, all data for a given page is fetched on the server
+  - The server then renders the HTML for the page
+  - The HTML, CSS and JavaScript for the page are sent to the client
+  - A non-interactive user interface is shown using the generated HTML and css
+  - Finally, react hydrates the user interface to make it interactive
+
+  **These steps are sequential and blocking**
+  ```
+  Time ----------------------------->
+  ------------------------------------------------------------------------------------------------------
+                                        |TTFB             |FCP   |TTI
+                                        |                 |      |
+    |A__________________________||B_____|_||C_____________|_||D__|_|
+
+    |A| Fetching data on server                                TTFB   Time To First Byte
+    |B| Rendering HTML on server                               FCP    First Contentful Paint
+    |C| Loading code on the client                             TTI    Time To Interactive
+    |D| Hydrating
+  ------------------------------------------------------------------------------------------------------
+  ```  
 ## Getting Started
 
 First, run the development server:
