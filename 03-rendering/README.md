@@ -166,26 +166,66 @@ Time ----------------------------->
 ```
 
 **Summary**
-  - First, all data for a given page is fetched on the server
-  - The server then renders the HTML for the page
-  - The HTML, CSS and JavaScript for the page are sent to the client
-  - A non-interactive user interface is shown using the generated HTML and css
-  - Finally, react hydrates the user interface to make it interactive
 
-  **These steps are sequential and blocking**
+- First, all data for a given page is fetched on the server
+- The server then renders the HTML for the page
+- The HTML, CSS and JavaScript for the page are sent to the client
+- A non-interactive user interface is shown using the generated HTML and css
+- Finally, React hydrates the user interface to make it interactive
+
+**These steps are sequential and blocking**
+
+```
+Time ----------------------------->
+------------------------------------------------------------------------------------------------------
+                                      |TTFB             |FCP   |TTI
+                                      |                 |      |
+  |A__________________________||B_____|_||C_____________|_||D__|_|
+
+  |A| Fetching data on server                                TTFB   Time To First Byte
+  |B| Rendering HTML on server                               FCP    First Contentful Paint
+  |C| Loading code on the client                             TTI    Time To Interactive
+  |D| Hydrating
+------------------------------------------------------------------------------------------------------
+```
+
+###### Suspense Benefits for SSR
+
+- **HTML streaming on the server:** Progressively rendering HTML from the server to the client
+- **Selective hydration on the client:** React priorities what components to make iteractive first based on user interaction
+
+**What is streaming?**
+
+- **Streaming** allows you to **break down the page's HTML into smaller chunks** and progressively send those chunks from the server to the client
+- This enables parts of the page to be displayed sooner, without waiting for all the data to load before any UI can be rendered
+
   ```
   Time ----------------------------->
   ------------------------------------------------------------------------------------------------------
-                                        |TTFB             |FCP   |TTI
-                                        |                 |      |
-    |A__________________________||B_____|_||C_____________|_||D__|_|
+                  |TTFB        |FCP   |TTI
+                  |            |      |
+                  |            |      |
+    |B____________|__||C_______|__||D_|__|
+                  |            |      |
+    |A____________|____________|__||B_|_____||C______________||D___|
+                  |            |      |
+    |A____________|____________|______||B______||C______________||D___|
 
     |A| Fetching data on server                                TTFB   Time To First Byte
     |B| Rendering HTML on server                               FCP    First Contentful Paint
     |C| Loading code on the client                             TTI    Time To Interactive
     |D| Hydrating
   ------------------------------------------------------------------------------------------------------
-  ```  
+  ```
+
+  **Another aplication on Suspense** Show loading.js component on specific part of the UI
+
+###### Drawback of Suspense
+
+1. **Increased bundle sizes** leadding to exessive downloads for users
+2. **Unnecessary hydration** delaying interactivity
+3. **Extensive client-side processing** that could result in poor performance
+
 ## Getting Started
 
 First, run the development server:
