@@ -226,6 +226,26 @@ Time ----------------------------->
 2. **Unnecessary hydration** delaying interactivity
 3. **Extensive client-side processing** that could result in poor performance
 
+**The Evolution of React**
+
+```
+CSR ----> SSR ----> Suspense for SSR
+```
+
+The new React architecture introduces a dual-component model:
+
+- **Client component:**
+  - Client components allow you to write interactive UI that is prerendered on the server and can use client JavaScript to run in the browser **(rendered once on the server and then on the client)**
+  - **Benefit of Client component**:
+    - **Interactivity:** using state, effects and event listener. Meaning they can provide immediate feedback to the user and update the UI.
+    - **Browser APIs:** having access to browser APIs like geolocation and localStorage
+  - In SSR **both** client and server components render on the server
+
+- **Server component:**
+  - Designed to operate on the server (render **only** on the server)
+  - Unlike client components, server component code is **not sent** to the client (**never** download to client)
+  - Aims to leverage the strengths of both server and client environments
+
 ## Getting Started
 
 First, run the development server:
