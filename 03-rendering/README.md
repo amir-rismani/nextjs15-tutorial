@@ -245,7 +245,30 @@ The new React architecture introduces a dual-component model:
   - Designed to operate on the server (render **only** on the server)
   - Unlike client components, server component code is **not sent** to the client (**never** download to client)
   - Aims to leverage the strengths of both server and client environments
-
+  - **Benefit of Server component**:
+    - **Reduced Bundle Sizes:** 
+      - Server components do not send code to the client, eliminating the need to download, parse and execute JavaScript for these components
+      - It removes the hydration step, speeding up app loading and interaction
+    - **Direct Access to Server-Side Resources:** By having direct access to database and filesystems, server component enable efficient data fetching and rendering without needing additional client-side processing
+    - **Enhanced Security:** Keeping sensitive data and logic, away from the client-side
+    - **Improved Data Fetching:**
+      - Server components enhance data fetching efficieny
+      - Typically, when fetching data on the client-side using useEffect, a child component cannot begin loading its data until the parent component has finished loading its own
+      - This sequential fetching of data often leads to poor performance
+      - `RSC` shift these sequential process to the server-side
+      - By moving this logic to the server, request latency is reduced, and overall performance is improved, eliminating client-server **waterfalls**
+    - **Caching:**
+      - Rendering on the server enables caching of the results, which can be reused in subsequent requests and across different user
+      - This approach can significantly improve performance and reduce costs by minimizing the amount of rendering and data fetching required for each request
+    - **Faster Initial Page Load and First Contentful Paint:** By generating HTML on the server, pages becom immediately visible to users without the delay of downloading, parsing and executing JavaScript
+    - **Improved SEO:** The server rendered HTML is fully accessible to search engine bots
+    - **Efficient Streaming:**
+      - `RSC` allows the rendering process to be divided into manageable chunks
+      - Eliminating the need to wait for the entire page to finish rendering on the server
+  - **React Server Component (RSC) Architecture:**
+    - **RSC:** Take charge of data fetching and static rendering
+    - **CC:** Rendering the interactive elements
+    - In Next.js The App Router is built around the RSC architecture
 ## Getting Started
 
 First, run the development server:
