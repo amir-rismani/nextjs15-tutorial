@@ -173,6 +173,31 @@ For example, the following configuration maps @/components/_ to components/_:
 }
 ```
 
+### Add Local Font
+
+- Add the fonts file to the `public` folder
+- Create a js file in the `constants` folder and name it `localFont.js`, this file contains [these codes](./src/constants/localFont.js)
+- Add the `className` attribute to the `body` tag in the `RootLayout` like [this](./src/app/layout.jsx)
+- Add the `fontFamily` to the `tailwindcss.config.js` file as following:
+
+```javascript
+export default {
+  // other config...
+  theme: {
+    extend: {
+      // other config...
+      fontFamily: {
+        sans: ["var(--font-vazir)", ...fontFamily.sans],
+      },
+      // other config...
+    },
+  },
+  // other config...
+};
+```
+
+- Add `font-family: var(--vazir-font)` to the `globals.css` file for the `html` and `body` tags
+
 ## Getting Started
 
 First, run the development server:
