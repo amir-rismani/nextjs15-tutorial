@@ -10,6 +10,7 @@
       "@/lib/*":["lib/*"],
       "@/providers/*":["providers/*"],
       "@/context/*":["context/*"],
+      "@/hooks/*":["hooks/*"],
     }
   }
 }
