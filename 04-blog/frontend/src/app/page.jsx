@@ -20,7 +20,7 @@ export default function Home() {
         </p>
         <div className="flex justify-center gap-x-8 w-full mt-10">
           <Button variant="outline">
-            <Link href="/blogs">مطالعه بلاگ ها</Link>
+            <Link href="/blog">مطالعه بلاگ ها</Link>
           </Button>
           <Button variant="primary">
             <Link href="/profile">مدیریت بلاگ ها</Link>

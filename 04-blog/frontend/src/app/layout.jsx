@@ -10,9 +10,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="RTL">
-      <body className={`${vazirFont.variable} font-sans`}>
+      <body className={`${vazirFont.variable} font-sans min-h-screen`}>
         <Header />
-        {children}
+        <main className="container xl:max-w-screen-xl">
+          {children}
+        </main>
       </body>
     </html>
   );
