@@ -2,7 +2,7 @@ import Button from "@/ui/Button";
 import Link from "next/link";
 
 export const metadata = {
-  title: "خانه  - وب اپلیکیشن مدیریت بلاگ",
+  title: "خانه",
 };
 
 export default function Home() {
@@ -20,10 +20,10 @@ export default function Home() {
         </p>
         <div className="flex justify-center gap-x-8 w-full mt-10">
           <Button variant="outline">
-            <Link href="/blog">مطالعه بلاگ ها</Link>
+            <Link href="/blog">مطالعه مقالات</Link>
           </Button>
           <Button variant="primary">
-            <Link href="/profile">مدیریت بلاگ ها</Link>
+            <Link href="/profile">مدیریت مقالات</Link>
           </Button>
         </div>
       </div>

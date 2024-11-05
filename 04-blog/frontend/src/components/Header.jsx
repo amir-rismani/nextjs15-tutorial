@@ -11,15 +11,15 @@ const navLinks = [
   },
   {
     id: 2,
-    children: "بلاگ ها",
-    path: "/blogs",
+    children: "بلاگ",
+    path: "/blog",
   },
 ];
 
 function Header() {
   // const { user, isLoading } = useAuth();
-  const  user = false
-  const  isLoading = false
+  const user = false
+  const isLoading = false
   return (
     <header
       className={`z-10 shadow-md bg-inherit mb-10 sticky top-0
