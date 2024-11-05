@@ -198,6 +198,12 @@ export default {
 
 - Add `font-family: var(--vazir-font)` to the `globals.css` file for the `html` and `body` tags
 
+### App Icon
+
+Use an image file to set an app icon by placing a `favicon`, `icon`, or `apple-icon` image file within your /app directory. The favicon image can only be located in the top level of app/.
+
+Next.js will evaluate the file and automatically add the appropriate tags to your app's `<head>` element.
+
 ## Getting Started
 
 First, run the development server:

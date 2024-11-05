@@ -7,7 +7,7 @@ export default function LoginPage() {
     return (
         <>
             <div>Login Page</div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-3 rounded" onClick={() => router.push('/dashboard')}>Login and redirect</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-3 rounded" onClick={() => router.push('/dashboard')}>Login and redirect</button>
         </>
     )
 }
