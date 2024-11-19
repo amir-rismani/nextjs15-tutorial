@@ -204,6 +204,21 @@ Use an image file to set an app icon by placing a `favicon`, `icon`, or `apple-i
 
 Next.js will evaluate the file and automatically add the appropriate tags to your app's `<head>` element.
 
+### Image Optimization
+
+The Next.js Image component extends the HTML `<img>` element with features for automatic image optimization:
+
+- Size Optimization: Automatically serve correctly sized images for each device, using modern image formats like WebP and AVIF.
+- Visual Stability: Prevent layout shift automatically when images are loading.
+- Faster Page Loads: Images are only loaded when they enter the viewport using native browser lazy loading, with optional blur-up placeholders.
+- Asset Flexibility: On-demand image resizing, even for images stored on remote servers
+
+Because `next/image` is designed to guarantee good performance results, it cannot be used in a way that will contribute to layout shift, and must be sized in one of three ways:
+
+1. Automatically, using a `static import`
+2. Manually, by including a `width` and `height` property used to determine the image's aspect ratio.
+3. Implicitly, by using `fill` which causes the image to expand to fill its parent element.
+
 ## Getting Started
 
 First, run the development server:
