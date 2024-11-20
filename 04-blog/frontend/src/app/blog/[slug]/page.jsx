@@ -3,14 +3,16 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-    const post = await getPostBySlug(params.slug)
+    const slug = (await params).slug
+    const post = await getPostBySlug(slug)
 
     return {
         title: post.title,
     }
 }
 export default async function SinglePost({ params }) {
-    const post = await getPostBySlug(params.slug)
+    const slug = (await params).slug
+    const post = await getPostBySlug(slug)
     if (!post) notFound()
     return (
         <div className="text-secondary-600 max-w-screen-md mx-auto">
