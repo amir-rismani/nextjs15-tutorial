@@ -219,6 +219,49 @@ Because `next/image` is designed to guarantee good performance results, it canno
 2. Manually, by including a `width` and `height` property used to determine the image's aspect ratio.
 3. Implicitly, by using `fill` which causes the image to expand to fill its parent element.
 
+### Server-Side Rendering in Next.js
+
+Note: both **Server** and **Client** components are rendered on the server on the initial render.
+
+- In Next.js the server-side rendering work **is split by Routes**
+- Eacch route can be either **static** (also called pre-rendered) or **dynamic**
+- There is also **Partial Pre-Rendering (PPR)** which mixes dynamic and static rendering in the same route (more later)
+
+#### Static vs Dynamic rendering
+
+##### Static Rendering
+
+- HTML is generated at **build time** or **periodically in the background** by re-fetching data (**ISR**)
+- Useful when data doesn't change often and is not personalized to user (e.g product and post page)
+- Default rendering strategy in Next.js (even when a page or component fetches data)
+
+##### Dynamic Rendering
+
+- HTML is generated at **request time** (for each new request reaches the server)
+- **Useful when:**
+  - The data changes frequently and is personalized to the user (e.g. cart)
+  - Rendering a route requires information that depends on request. (e.g. search params, cookies, header, params)
+- A route automatically switches to dynamic rendering in certain conditions.
+
+###### When Next.js switches to dynamic rendering
+
+Usually, developers **don't directly choose** whether a route should be static or dynamic. Next.js will automatically switches to dynamic rendering in the following scenarios:
+
+- The route has a **dynamic segment** (page uses **params** - _[postSlug]_)
+- **_searchParams_** are used in page component (_/posts?category=sport_)
+- **Headers()** or **cookies()** are used in of any route's server component (dynamic functions)
+- An **uncatched data request** is made in in of any route's server component
+- We can also **force** Next.js to render a route dynamically
+```
+1. export const dynamic = "force-dynamic";  // from page.js
+
+2. export const revalidate = 0;  // from page.js
+
+3. { cashe: "no-store" }  // added to a fetch request in any of the route's server components
+
+4. noStore() // in any of the route's server components
+```
+
 ## Getting Started
 
 First, run the development server:
