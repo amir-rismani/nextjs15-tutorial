@@ -229,13 +229,13 @@ Note: both **Server** and **Client** components are rendered on the server on th
 
 #### Static vs Dynamic rendering
 
-##### Static Rendering
+##### Static Rendering (prerendered as static content)
 
 - HTML is generated at **build time** or **periodically in the background** by re-fetching data (**ISR**)
 - Useful when data doesn't change often and is not personalized to user (e.g product and post page)
 - Default rendering strategy in Next.js (even when a page or component fetches data)
 
-##### Dynamic Rendering
+##### Dynamic Rendering (server-rendered on demand)
 
 - HTML is generated at **request time** (for each new request reaches the server)
 - **Useful when:**
@@ -252,6 +252,7 @@ Usually, developers **don't directly choose** whether a route should be static o
 - **Headers()** or **cookies()** are used in of any route's server component (dynamic functions)
 - An **uncatched data request** is made in in of any route's server component
 - We can also **force** Next.js to render a route dynamically
+
 ```
 1. export const dynamic = "force-dynamic";  // from page.js
 
@@ -261,6 +262,35 @@ Usually, developers **don't directly choose** whether a route should be static o
 
 4. noStore() // in any of the route's server components
 ```
+
+###### Generate static params
+
+The `generateStaticParams` function can be used in combination with dynamic route segments to **statically generate** routes at build time instead of on-demand at request time.
+
+```javascript
+// Return a list of `params` to populate the [slug] dynamic segment
+export async function generateStaticParams() {
+  const posts = await fetch("https://.../posts").then((res) => res.json());
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+// Multiple versions of this page will be statically generated
+// using the `params` returned by `generateStaticParams`
+export default async function Page({ params }) {
+  const { slug } = await params;
+  // ...
+}
+```
+
+generateStaticParams should return an array of objects where each object represents the populated dynamic segments of a single route.
+
+- Each property in the object is a dynamic segment to be filled in for the route.
+- The properties name is the segment's name, and the properties value is what that segment should be filled in with.
+
+More details on the page (`generateStaticParams`)[https://nextjs.org/docs/app/api-reference/functions/generate-static-params]
 
 ## Getting Started
 
