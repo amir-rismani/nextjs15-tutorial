@@ -1,6 +1,8 @@
 import { getPostBySlug, getPosts } from "@/services/postServices";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
     const posts = await getPosts();
 
