@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import Spinner from '@/ui/Spinner'
 import PostList from '../_components/PostList'
-
+// export const dynamic = 'force-dynamic'; // اجباری برای استفاده از رندر پویا
+export const revalidate = 12;
 function BlogPage() {
     return (
         <div>

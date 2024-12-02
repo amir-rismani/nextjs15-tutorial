@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
+
 function Error({ error, reset }) {
     return (
         <div className="container xl:max-w-screen-xl">
@@ -10,7 +12,8 @@ function Error({ error, reset }) {
                         onClick={reset}
                         className="flex items-center gap-x-2 text-secondary-500"
                     >
-                        تلاش مجدد
+                        <ArrowPathIcon className="w-6 h-6 text-primary-900" />
+                        <span>تلاش مجدد</span>
                     </button>
                 </div>
             </div>

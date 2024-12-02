@@ -292,6 +292,19 @@ generateStaticParams should return an array of objects where each object represe
 
 More details on the page (`generateStaticParams`)[https://nextjs.org/docs/app/api-reference/functions/generate-static-params]
 
+**Notice:** `dynamicParams`; Control what happens when a dynamic segment is visited that was not generated with generateStaticParams.
+
+```javascript
+export const dynamicParams = true; // true | false,
+```
+
+- **`true`** (default): Dynamic segments not included in `generateStaticParams` are generated on demand.
+- **`false`**: Dynamic segments not included in `generateStaticParams` will return a 404.
+### Caching strategy
+- In Next.js 14, `force-cache` was used by default if a `cache` option was not provided, unless a dynamic function or dynamic config option was used.
+- In Next.js 15, `no-store` is used by default if a `cache` option is not provided. This means **fetch requests will not be cached by default.**
+#### Next V14
+#### Next V15
 ## Getting Started
 
 First, run the development server:
