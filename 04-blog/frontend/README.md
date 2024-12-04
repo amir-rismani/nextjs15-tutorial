@@ -300,11 +300,181 @@ export const dynamicParams = true; // true | false,
 
 - **`true`** (default): Dynamic segments not included in `generateStaticParams` are generated on demand.
 - **`false`**: Dynamic segments not included in `generateStaticParams` will return a 404.
-### Caching strategy
+
+#### Partial Prerendering
+
+- Partial Prerendering (PPR) enables you to combine static and **dynamic** components together in the same route.
+- During the build, Next.js prerenders as much of the route as possible. If dynamic code is detected, like reading from the incoming request, you can wrap the relevant component with a **React Suspense** boundary. The Suspense boundary fallback will then be included in the prerendered HTML.
+
+##### Using Partial Prerendering
+
+- In Next.js 15, you can incrementally adopt Partial Prerendering in **layouts** and **pages** by setting the **`ppr`** option in `next.config.js` to `incremental`, and exporting the `experimental_ppr` **route config option** at the top of the file:
+
+```javascript
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  experimental: {
+    ppr: "incremental",
+  },
+};
+
+export default nextConfig;
+```
+
+```javascript
+import { Suspense } from "react"
+import { StaticComponent, DynamicComponent, Fallback } from "@/app/ui"
+
+export const experimental_ppr = true
+
+export default function Page() {
+  return {
+     <>
+      <StaticComponent />
+      <Suspense fallback={<Fallback />}>
+        <DynamicComponent />
+      </Suspense>
+     </>
+  };
+}
+```
+
+### Caching
+
+#### Next.js V14
+
 - In Next.js 14, `force-cache` was used by default if a `cache` option was not provided, unless a dynamic function or dynamic config option was used.
+
+- By default, Next.js automatically catches the returned values of fetch operations in `Data cache` on the server.
+- By default, Next.js will cache as much as possible to improve performance and reduce cost.
+
+##### Caching Mechanisms
+
+###### Request Memoization
+
+- **What: _Return values of functions_**
+- **Where: _Server_**
+- **Purpose: _Re-use data in a React Component tree_**
+- **Duration: _Per-request lifecycle_**
+
+```
+.______________________________________________________.
+|                        Server                        |
+|______________________________________________________|
+|                   |in memory           |  Data Catch |
+|Rendering          |Request Memoization |      OR     |
+|                   |Function Returns    | Data Source |
+|___________________|____________________|_____________|
+|----- fetch --------------> MISS -----------> HIT
+|<-------------------------- SET <--------------|
+|
+|----- fetch --------------> HIT
+|<----------------------------|
+|
+|----- fetch --------------> HIT
+|<----------------------------|
+```
+
+###### Data Cache
+
+- **What: _Data_**
+- **Where: _Server_**
+- **Purpose: _Store data across user requests and deployments_**
+- **Duration: _Persistent (can be revalidated)_**
+
+```
+.______________________________________________________.
+|                        Server                        |
+|______________________________________________________|
+|                   |                    |             |
+|Rendering          |     Data Catch      | Data Source |
+|___________________|____________________|_____________|
+|----- fetch --------------> MISS -----------> HIT
+|<-------------------------- SET <--------------|
+|
+|----- fetch --------------> HIT
+|<----------------------------|
+|
+|----- fetch --------------> HIT
+|<----------------------------|
+```
+
+**How to revalidate?**
+
+- Time-based (automatic) for all data on page:
+
+```javascript
+export const revalidate = $time; // from page.js
+```
+
+- Time-based (automatic) for one data request:
+
+```javascript
+fetch("...", { next: { revalidate: $time } });
+```
+
+**According to these:**
+
+1. Pass time interval
+2. New incomming request to rebuild this page
+3. Updated data will be shown to the next user
+   **These process called ISR (Incremental Static Regeneration)**
+
+- On-demand (manual):
+
+```javascript
+revalidatePath();
+// or
+revalidateTag();
+```
+
+**How to opting out?**
+
+- Entire page:
+
+```javascript
+export const revalidate = 0; // from page.js
+```
+
+- Entire page:
+
+```javascript
+export const dynamic = "force-dynamic"; // from page.js
+```
+
+- Individual request:
+
+```javascript
+fetch("...", { catch: "no-store" });
+```
+
+- Individual server components:
+
+```javascript
+noStore();
+```
+
+**These forces page to become dynamic**
+
+**Note:** This code defines a configuration object for Next.js. It **enables detailed logging** for `fetch` requests by setting `fullUrl: true`, which ensures the full URL of each request is logged. The configuration is exported as the default module for use in the Next.js application.
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+};
+export default nextConfig;
+```
+
+#### Next.js V15
+
 - In Next.js 15, `no-store` is used by default if a `cache` option is not provided. This means **fetch requests will not be cached by default.**
-#### Next V14
-#### Next V15
+
 ## Getting Started
 
 First, run the development server:
