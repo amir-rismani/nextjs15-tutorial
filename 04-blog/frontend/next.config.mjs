@@ -14,6 +14,9 @@ const nextConfig = {
         fetches: {
             fullUrl: true,
         }
+    },
+    experimental: {
+        ppr: 'incremental'
     }
 };
 
