@@ -341,7 +341,6 @@ export default function Page() {
 ```
 
 ### Caching
-
 #### Next.js V14
 
 - In Next.js 14, `force-cache` was used by default if a `cache` option was not provided, unless a dynamic function or dynamic config option was used.
@@ -475,6 +474,10 @@ export default nextConfig;
 
 - In Next.js 15, `no-store` is used by default if a `cache` option is not provided. This means **fetch requests will not be cached by default.**
 
+
+### Authentication vs Authorization
+- **Authentication:** The process of verifying who a user is
+- **Authorization:** The process of verifying what they have access to
 ## Getting Started
 
 First, run the development server:
