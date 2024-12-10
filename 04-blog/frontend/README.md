@@ -341,6 +341,7 @@ export default function Page() {
 ```
 
 ### Caching
+
 #### Next.js V14
 
 - In Next.js 14, `force-cache` was used by default if a `cache` option was not provided, unless a dynamic function or dynamic config option was used.
@@ -474,10 +475,24 @@ export default nextConfig;
 
 - In Next.js 15, `no-store` is used by default if a `cache` option is not provided. This means **fetch requests will not be cached by default.**
 
-
 ### Authentication vs Authorization
+
 - **Authentication:** The process of verifying who a user is
 - **Authorization:** The process of verifying what they have access to
+
+#### Authentication
+
+**Access Token, Refresh Token, and `withCredentials`**
+**Access Tokens** provide short-term access to protected resources, while **Refresh Tokens** allow obtaining new Access Tokens when they expire. When working with **Axios**, the `withCredentials: true` option is required to store and send cookies for these tokens, especially in cross-origin requests.
+
+**How It Works:**
+
+1. The server sends **Access and Refresh Tokens** as _cookies_ with secure configurations (e.g., HttpOnly, Secure, SameSite).
+2. `withCredentials: true` ensures cookies are stored in the browser and included in subsequent requests.
+3. When the Access Token expires, a request with the Refresh Token is made to obtain a new Access Token automatically.
+   
+This setup secures token management and simplifies authentication flows.
+
 ## Getting Started
 
 First, run the development server:

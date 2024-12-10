@@ -8,11 +8,12 @@ import Button from '@/ui/Button';
 import { signupApi } from '@/services/authServices';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import SpinnerMini from '@/ui/SpinnerMini';
 const schema = yup
     .object({
         name: yup.string().min(3, 'نام و نام خانوادگی نامعتبر است').max(30).required('نام و نام خانوادگی الزامی است'),
         email: yup.string().email('پست الکترونیکی نامعتبر است').required('پست الکترونیکی الزامی است'),
-        password: yup.string().min(6, 'کلمه عبور بایستی حداقل ۶ کاراکتر داشته باشد').required('کلمه عبور الزامی است'),
+        password: yup.string().min(8, 'کلمه عبور بایستی حداقل ۸ کاراکتر داشته باشد').required('کلمه عبور الزامی است'),
     })
     .required()
 
@@ -31,9 +32,7 @@ function Signup() {
             router.push("/profile")
 
         } catch (error) {
-            const errorMessage = error?.response?.data?.message
-            // console.error(errorMessage);
-            toast.error(errorMessage)
+            toast.error(error?.response?.data?.message)
         }
     }
 
@@ -46,7 +45,7 @@ function Signup() {
                 <RHFTextField label="نام و نام خانوادگی" name="name" isRequired register={register} errors={errors} />
                 <RHFTextField label="پست الکترونیک" name="email" dir='ltr' isRequired register={register} errors={errors} />
                 <RHFTextField label="کلمه عبور" type='password' name="password" dir='ltr' isRequired register={register} errors={errors} />
-                <div>
+                <div className='mt-10'>
                     {isLoading ? (
                         <SpinnerMini />
                     ) : (
