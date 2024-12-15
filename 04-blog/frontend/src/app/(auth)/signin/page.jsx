@@ -7,9 +7,7 @@ import SpinnerMini from '@/ui/SpinnerMini'
 import Button from '@/ui/Button'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import { SigninApi } from '@/services/authServices'
-import toast from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
+import { useAuth } from '@/context/AuthContext'
 
 const schema = yup
   .object({
@@ -23,15 +21,9 @@ function Signin() {
     resolver: yupResolver(schema),
     mode: 'onTouched'
   });
-  const router = useRouter()
+  const { signin } = useAuth()
   const onSubmit = async (data) => {
-    try {
-      const { user, message } = await SigninApi(data);
-      toast.success(message)
-      router.push("/dashboard")
-    } catch (error) {
-      toast.error(error?.response?.data?.message)
-    }
+    await signin(data)
   }
 
   return (

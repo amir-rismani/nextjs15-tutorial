@@ -482,7 +482,7 @@ export default nextConfig;
 
 #### Authentication
 
-**Access Token, Refresh Token, and `withCredentials`**
+##### Access Token, Refresh Token, and `withCredentials`
 **Access Tokens** provide short-term access to protected resources, while **Refresh Tokens** allow obtaining new Access Tokens when they expire. When working with **Axios**, the `withCredentials: true` option is required to store and send cookies for these tokens, especially in cross-origin requests.
 
 **How It Works:**

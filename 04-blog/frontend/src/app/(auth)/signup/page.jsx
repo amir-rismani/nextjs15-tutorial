@@ -5,10 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import Link from 'next/link';
 import Button from '@/ui/Button';
-import { signupApi } from '@/services/authServices';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
 import SpinnerMini from '@/ui/SpinnerMini';
+import { useAuth } from '@/context/AuthContext';
 const schema = yup
     .object({
         name: yup.string().min(3, 'نام و نام خانوادگی نامعتبر است').max(30).required('نام و نام خانوادگی الزامی است'),
@@ -23,17 +21,9 @@ function Signup() {
         resolver: yupResolver(schema),
         mode: 'onTouched'
     });
-    const router = useRouter();
-
+    const { signup } = useAuth()
     const onSubmit = async (data) => {
-        try {
-            const { user, message } = await signupApi(data)
-            toast.success(message)
-            router.push("/profile")
-
-        } catch (error) {
-            toast.error(error?.response?.data?.message)
-        }
+        await signup(data)
     }
 
     return (
