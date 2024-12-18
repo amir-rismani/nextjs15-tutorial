@@ -85,10 +85,11 @@ function AuthProvider({ children }) {
         try {
             const { user } = await getUserApi()
             dispatch({ type: 'user/loaded', payload: user });
+
         } catch (error) {
             const errorMessage = error?.response?.data?.message
             dispatch({ type: 'rejected', payload: errorMessage });
-            console.error(errorMessage);
+            console.log(errorMessage);
         }
     }
 
