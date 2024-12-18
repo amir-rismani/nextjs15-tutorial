@@ -483,14 +483,19 @@ export default nextConfig;
 #### Authentication
 
 ##### Access Token, Refresh Token, and `withCredentials`
+
 **Access Tokens** provide short-term access to protected resources, while **Refresh Tokens** allow obtaining new Access Tokens when they expire. When working with **Axios**, the `withCredentials: true` option is required to store and send cookies for these tokens, especially in cross-origin requests.
 
+**Note:** If you are using the fetch method, you must use `credential: 'include'`.
+**Note:** **Access Token** and **Refresh Token** are stored as **http-only cookies**.
+
+More information to use via: [.\services\httpService.js](httpService.js)
 **How It Works:**
 
 1. The server sends **Access and Refresh Tokens** as _cookies_ with secure configurations (e.g., HttpOnly, Secure, SameSite).
 2. `withCredentials: true` ensures cookies are stored in the browser and included in subsequent requests.
 3. When the Access Token expires, a request with the Refresh Token is made to obtain a new Access Token automatically.
-   
+
 This setup secures token management and simplifies authentication flows.
 
 ## Getting Started
