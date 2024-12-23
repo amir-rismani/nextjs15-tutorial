@@ -1,10 +1,10 @@
-import { getPostBySlug, getPosts } from "@/services/postServices";
+import { getPostBySlugApi, getPostsApi } from "@/services/postServices";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-    const posts = await getPosts();
+    const posts = await getPostsApi();
 
     return posts.map((post) => ({
         slug: post.slug,
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
     const slug = (await params).slug
-    const post = await getPostBySlug(slug)
+    const post = await getPostBySlugApi(slug)
 
     return {
         title: post.title,
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
 }
 export default async function SinglePost({ params }) {
     const slug = (await params).slug
-    const post = await getPostBySlug(slug)
+    const post = await getPostBySlugApi(slug)
     if (!post) notFound()
     return (
         <div className="text-secondary-600 max-w-screen-md mx-auto">

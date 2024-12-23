@@ -498,6 +498,8 @@ More information to use via: [.\services\httpService.js](httpService.js)
 
 This setup secures token management and simplifies authentication flows.
 
+### Why must send cookies in get server Actions
+
 ## Getting Started
 
 First, run the development server:

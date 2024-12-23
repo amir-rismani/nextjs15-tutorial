@@ -1,6 +1,8 @@
+import { BASE_URL, endpoints } from "constants/apiUrl";
+
 const { default: axios } = require("axios");
 const instance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    baseURL: BASE_URL,
     withCredentials: true
 });
 
@@ -17,7 +19,7 @@ instance.interceptors.response.use(
         if (err.response.status === 401 && !originalConfig) {
             originalConfig._retry = true;
             try {
-                const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/user/refresh-token`, {
+                const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}${endpoints.user.refreshToken}`, {
                     withCredentials: true
                 })
                 if (data) return app(originalConfig)
