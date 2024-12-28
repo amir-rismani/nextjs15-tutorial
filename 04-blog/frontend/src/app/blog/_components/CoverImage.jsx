@@ -4,7 +4,7 @@ import Link from "next/link";
 function CoverImage({ coverImageUrl, title, slug }) {
     return (
         <div className="relative aspect-[16/9] overflow-hidden rounded-md mb-4">
-            <Link href={`blog/${slug}`}>
+            <Link href={`/blog/${slug}`}>
                 <Image
                     src={coverImageUrl}
                     alt={title}

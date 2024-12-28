@@ -1,17 +1,21 @@
-import { getPostsOfCategoryApi } from "@/services/postServices";
+import { getPostsApi } from "@/services/postServices";
+import { setCookieOnReq } from "@/utils/setCookieOnReq";
 import PostList from "app/blog/_components/PostList";
+import SearchResult from "app/blog/_components/SearchResult";
+import { cookies } from "next/headers";
+import queryString from "query-string";
 
-async function Category({ params }) {
+async function Category({ params, searchParams }) {
     const { slug } = (await params);
-    const searchParams = `?categorySlug=${slug}`
-    const posts = await getPostsOfCategoryApi(searchParams)
+    const cookieStore = cookies();
+    const queries = `${queryString.stringify(searchParams)}&categorySlug=${slug}`;
+    const options = setCookieOnReq(cookieStore);
+    const posts = await getPostsApi(queries, options);
+
     return (
         <div>
-            {posts.length === 0
-                ? <p className="text-lg text-secondary-600 text-center">مقاله ای در این دسته بندی یافت نشد.</p>
-                : <PostList posts={posts} />
-            }
-
+            <SearchResult posts={posts} />
+            <PostList posts={posts} />
         </div>
     )
 }

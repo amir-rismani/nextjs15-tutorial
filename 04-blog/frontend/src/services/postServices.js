@@ -8,20 +8,12 @@ export async function getPostBySlugApi(slug) {
     return post
 }
 
-export async function getPostsApi(options) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${postEndpoints.getPosts}`, options);
+export async function getPostsApi(queries, options) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${postEndpoints.getPosts}?${queries}`, options);
     const { data } = await res.json();
     const { posts } = data || {}
     return posts
 }
-
-export async function getPostsOfCategoryApi(searchParams) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${postEndpoints.getPosts}${searchParams}`);
-    const { data } = await res.json();
-    const { posts } = data || {}
-    return posts
-}
-
 
 export async function likePostApi(postId) {
     return http.post(`${postEndpoints.likePost}/${postId}`).then(({ data }) => data.data)
